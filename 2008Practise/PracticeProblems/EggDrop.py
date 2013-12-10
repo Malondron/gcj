@@ -49,8 +49,8 @@ def eggDrop ():
     Fos = {}
 
 
-    for j in range (0,1000):
-      for i in range(0,1000):
+    for j in range (0,100):
+      for i in range(0,100):
           cFP = calcFPrime(i, j, Fos)
           Fos[str([i,j])] = cFP
 
@@ -61,7 +61,7 @@ def eggDrop ():
         F = int(bla[0])
         D = int(bla[1])
         B = int(bla[2])
-        if(B > 32):
+        if(B  > 32):
             FPrime = -1
         else:
             FPrime = calcFPrime(D,B,Fos)
@@ -99,6 +99,8 @@ for i in range(0,3):
     for j in range(0,2):
 
         print [i,j]
+
+
 
 
 
