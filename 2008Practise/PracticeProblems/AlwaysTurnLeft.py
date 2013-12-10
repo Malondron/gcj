@@ -1,17 +1,43 @@
 def alwaysTurnLeft ():
     nCases = 0
     l = 0
-    f = open ("/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.in",'r')
-    g = open ("/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.out",'w')
+    x = [0,0]
+    y = [0,0]
+    f = open ("c:\\gcj\\2008Practise\\PracticeProblems\\B-large-practice.in",'r')
+    g = open ("c:\\gcj\\2008Practise\\PracticeProblems\\B-large-practice.out",'w')
     lines = f.readlines()
     nCases = int(lines[0])
     types = {'[1, 0, 0, 0]' : '1', '[0, 1, 0, 0]' : '2', '[1, 1, 0, 0]' : '3', '[0, 0, 1, 0]' : '4',
              '[1, 0, 1, 0]' : '5', '[0, 1, 1, 0]' : '6', '[1, 1, 1, 0]' : '7', '[0, 0, 0, 1]' : '8',
              '[1, 0, 0, 1]' : '9', '[0, 1, 0, 1]' : 'a', '[1, 1, 0, 1]' : 'b', '[0, 0, 1, 1]' : 'c',
              '[1, 0, 1, 1]' : 'd', '[0, 1, 1, 1]' : 'e', '[1, 1, 1, 1]' : 'f'}
+    lines.pop(0)
+    case = 0
+    for line in lines:
+        case = case +1
+        g.write("Case #" + str(case) + ":\n")
+        cells =  getCells(line)
+        sortedCells = sorted(cells, key=lambda x: (x[0][1], x[0][0]))
+
+        row = 0
+        row_text = ''
+        for cell in sortedCells:
+            if (cell[0][1] == row):
+                cell.pop(0)
+                row_text = row_text + types[str(cell)]
+            else:
+                cell.pop(0)
+                g.write(row_text+'\n')
+                row = row+1
+                row_text = types[str(cell)]
+
+        g.write(row_text+'\n')
 
 
-    return sorted(getCells(lines[1]),lambda :x x[0][1])
+
+
+
+    return 1
 
 
 def stepPermute(direction,step):
@@ -48,7 +74,7 @@ def getCells(walks):
 
     for walk in walkss:
         direction = map(lambda x: x * -1, direction)
-        print direction
+#        print direction
         steps = list(walk)
         for step in steps:
             if(step == 'W'):
@@ -112,8 +138,9 @@ def addToCell(cells,position,direction,step):
 alwaysTurnLeft()
 
 def test():
-    m = [[[1, 0],'o','o','o','o']]
-    return [x for x in m if (x[0] == [1, 0])]
+    m = [[1, 0],1,0,0,1]
+    m.pop(0)
+    return str(m)
 
 test()
 
