@@ -1,8 +1,8 @@
 def alwaysTurnLeft ():
     nCases = 0
     l = 0
-    f = open ("C:\\gcj\\2008Practise\\PracticeProblems\\B-small-practice.in",'r')
-    g = open ("C:\\gcj\\2008Practise\\PracticeProblems\\B-small-practice.out",'w')
+    f = open ("/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.in",'r')
+    g = open ("/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.out",'w')
     lines = f.readlines()
     nCases = int(lines[0])
     types = {'[1, 0, 0, 0]' : '1', '[0, 1, 0, 0]' : '2', '[1, 1, 0, 0]' : '3', '[0, 0, 1, 0]' : '4',
@@ -11,7 +11,7 @@ def alwaysTurnLeft ():
              '[1, 0, 1, 1]' : 'd', '[0, 1, 1, 1]' : 'e', '[1, 1, 1, 1]' : 'f'}
 
 
-    return [x for x in getCells(lines[1]) if (x[0][1] >= 0)]
+    return sorted(getCells(lines[1]),lambda :x x[0][1])
 
 
 def stepPermute(direction,step):
@@ -57,6 +57,8 @@ def getCells(walks):
             else:
                 cells = addToCell(cells,position,direction,step)
                 direction = stepPermute(direction,step)
+
+        cells.pop()
 
 
     return cells
