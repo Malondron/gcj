@@ -17,6 +17,8 @@ def calcFPrime(D,B,F):
 def calcDPrime(F,B,Fos):
     DPrime = 0
     i = 0
+    if(B > 3000):
+        B = 3000
     while True:
         FPrime = calcFPrime(i,B,Fos)
 #        print FPrime
@@ -29,6 +31,8 @@ def calcDPrime(F,B,Fos):
 def calcBPrime(F,D,Fos):
     BPrime = 0
     i = 0
+    if(D > 3000):
+        D = 3000
     while True:
         FPrime = calcFPrime(D,i,Fos)
 #        print FPrime
@@ -44,8 +48,10 @@ def eggDrop ():
     l = 0
     x = [0,0]
     y = [0,0]
-    f = open ("c:\\gcj\\2008Practise\\PracticeProblems\\C-large-practice.in",'r')
-    g = open ("c:\\gcj\\2008Practise\\PracticeProblems\\C-large-practice.out",'w')
+#    f = open ("c:\\gcj\\2008Practise\\PracticeProblems\\C-large-practice.in",'r')
+#    g = open ("c:\\gcj\\2008Practise\\PracticeProblems\\C-large-practice.out",'w')
+    f = open ("/home/andreask/gcj/2008Practise/PracticeProblems/C-large-practice.in",'r')
+    g = open ("/home/andreask/gcj/2008Practise/PracticeProblems/C-large-practice.out",'w')
     lines = f.readlines()
     nCases = int(lines[0])
     lines.pop(0)
@@ -53,8 +59,8 @@ def eggDrop ():
     Fos = {}
 
 
-    for j in range (0,100):
-      for i in range(0,100):
+    for j in range (0,3001):
+      for i in range(0,3001):
           cFP = calcFPrime(i, j, Fos)
           Fos[str([i,j])] = cFP
 
@@ -65,7 +71,7 @@ def eggDrop ():
         F = int(bla[0])
         D = int(bla[1])
         B = int(bla[2])
-        if(B + math.sqrt(D - B) > 32):
+        if(B > 32):
             FPrime = -1
         else:
             FPrime = calcFPrime(D,B,Fos)
@@ -91,13 +97,6 @@ def eggDrop ():
 eggDrop()
 
 
-2**32
-def test ():
-    t = [[i*j for i in range(0,5)] for j in range(0,4)]
-
-    return t[3][3]
-
-test()
 
 
 
