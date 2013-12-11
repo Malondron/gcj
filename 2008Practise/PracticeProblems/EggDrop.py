@@ -1,5 +1,5 @@
 
-
+import math
 
 def calcFPrime(D,B,F):
     FPrime = 0
@@ -16,23 +16,27 @@ def calcFPrime(D,B,F):
 
 def calcDPrime(F,B,Fos):
     DPrime = 0
-    for i in range(0,F+1):
+    i = 0
+    while True:
         FPrime = calcFPrime(i,B,Fos)
+#        print FPrime
         if(FPrime >= F):
-            DPrime = i
-            break
+            return i
+        i = i + 1
 
     return DPrime
 
 def calcBPrime(F,D,Fos):
     BPrime = 0
-    for i in range(D,-1,-1):
+    i = 0
+    while True:
         FPrime = calcFPrime(D,i,Fos)
 #        print FPrime
-        if(FPrime < F):
-            BPrime = i+1
-            break
 
+        if(FPrime >= F):
+            return i
+
+        i = i+1
     return BPrime
 
 def eggDrop ():
@@ -40,8 +44,8 @@ def eggDrop ():
     l = 0
     x = [0,0]
     y = [0,0]
-    f = open ("/home/andreask/gcj/2008Practise/PracticeProblems/C-large-practice.in",'r')
-    g = open ("/home/andreask/gcj/2008Practise/PracticeProblems/C-large-practice.out",'w')
+    f = open ("c:\\gcj\\2008Practise\\PracticeProblems\\C-large-practice.in",'r')
+    g = open ("c:\\gcj\\2008Practise\\PracticeProblems\\C-large-practice.out",'w')
     lines = f.readlines()
     nCases = int(lines[0])
     lines.pop(0)
@@ -61,7 +65,7 @@ def eggDrop ():
         F = int(bla[0])
         D = int(bla[1])
         B = int(bla[2])
-        if(B  > 32):
+        if(B + math.sqrt(D - B) > 32):
             FPrime = -1
         else:
             FPrime = calcFPrime(D,B,Fos)
@@ -95,10 +99,10 @@ def test ():
 
 test()
 
-for i in range(0,3):
-    for j in range(0,2):
 
-        print [i,j]
+
+
+
 
 
 
