@@ -10,11 +10,6 @@
   (with-open [r (reader file)]
     (doall (line-seq r))))
 
-(defn write-lines [file s]
-  (with-open [w (writer file)]
-    (doseq [line s]
-      (.write w line))))
-
 (defn write-lines
 	  "Writes lines (a seq) to f, separated by newlines.  f is opened with
 	  writer, and automatically closed at the end of the sequence."
@@ -75,4 +70,6 @@
 
 (alien-numbers)
 (.indexOf "hej" (str(second "he")))
+
+
 
