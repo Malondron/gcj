@@ -3,10 +3,10 @@
         [clojure.string  :only [split]])
   (:import (java.io File)))
 
-;(def infile "c:\\gcj\\2008Practise\\PracticeProblems\\B-small-practice.in")
-;(def outfile "c:\\gcj\\2008Practise\\PracticeProblems\\B-small-practice.out.clj")
-(def infile "/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.in")
-(def outfile "/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.out.clj")
+(def infile "c:\\gcj\\2008Practise\\PracticeProblems\\B-large-practice.in")
+(def outfile "c:\\gcj\\2008Practise\\PracticeProblems\\B-large-practice.out.clj")
+;(def infile "/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.in")
+;(def outfile "/home/andreask/gcj/2008Practise/PracticeProblems/B-small-practice.out.clj")
 
 
 (defn read-lines [file]
@@ -106,18 +106,30 @@
 (defn always-turn-left []
   (let [lines (read-lines infile)
         nCases (read-string (first lines))
-        types {"[1, 0, 0, 0]" "1", "[0, 1, 0, 0]"   "2", "[1, 1, 0, 0]"   "3", "[0, 0, 1, 0]"   "4",
-             "[1, 0, 1, 0]"   "5", "[0, 1, 1, 0]"   "6", "[1, 1, 1, 0]"   "7", "[0, 0, 0, 1]"   "8",
-             "[1, 0, 0, 1]"   "9", "[0, 1, 0, 1]"   "a", "[1, 1, 0, 1]"   "b", "[0, 0, 1, 1]"   "c",
-             "[1, 0, 1, 1]"   "d", "[0, 1, 1, 1]"   "e", "[1, 1, 1, 1]"   "f"}
-        out-file outfile
-        sort-cells (sort-by (juxt (fn [x] (second (first x))) (fn [x] (first (first x)))) (get-cells (nth lines 1)))]
-    (loop [row 0]
-      (let [ress (filter (fn [x] (= row (second (first x)))) sort-cells)]
-        (if (= 0 (count ress))
+        types {"[1 0 0 0]" "1", "[0 1 0 0]"   "2", "[1 1 0 0]"   "3", "[0 0 1 0]"   "4",
+             "[1 0 1 0]"   "5", "[0 1 1 0]"   "6", "[1 1 1 0]"   "7", "[0 0 0 1]"   "8",
+             "[1 0 0 1]"   "9", "[0 1 0 1]"   "a", "[1 1 0 1]"   "b", "[0 0 1 1]"   "c",
+             "[1 0 1 1]"   "d", "[0 1 1 1]"   "e", "[1 1 1 1]"   "f"}
+        out-file outfile]
+
+    (with-open [writer (writer out-file)]
+      (loop [case 1]
+      (if (= case (inc nCases))
           "Done"
-          (do (print ress)
-            (recur (inc row))))))))
+          (do
+            (.write writer (str "Case #" case ":"))
+            (.newLine writer)
+            (loop [row 0]
+              (let [sort-cells (sort-by (juxt (fn [x] (second (first x))) (fn [x] (first (first x)))) (get-cells (nth lines case)))
+                    ress (filter (fn [x] (= row (second (first x)))) sort-cells)]
+              (if (= 0 (count ress))
+               "Done"
+                (let [ln (reduce str (map (fn [x] (types (str (vec (rest x))))) ress))]
+                  (do
+                    (.write writer (str ln))
+                     (.newLine writer)
+                (recur (inc row)))))))
+            (recur (inc case))))))))
 ;    (loop [l 1 cells []]
 ;      (if (= l (inc (count lines)))
  ;       "Done"
@@ -127,8 +139,9 @@
 
 (always-turn-left)
 
+(str (vec (rest [[0 1] 0 7])))
 
-(assoc [0, 1] 0 7)
+;(conj )
+;(replace [0 2 77] (list 0 1 2 3 4))
 
-(conj )
-(replace [0 2 77] (list 0 1 2 3 4))
+
